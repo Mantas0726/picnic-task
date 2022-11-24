@@ -55,6 +55,22 @@ void main() {
     },
   );
 
+  test('should take to login screen when appInitUseCase succeeds', () async {
+    // GIVEN
+    whenListen(
+      Mocks.userStore,
+      Stream.fromIterable([const User.anonymous()]),
+    );
+    when(() => AppInitMocks.appInitUseCase.execute()).thenAnswer((_) => successFuture(unit));
+    when(() => navigator.openLogin(any())).thenAnswer((_) => Future.value());
+
+    // WHEN
+    await presenter.onInit();
+
+    // THEN
+    verify(() => navigator.openLogin(any()));
+  });
+
   setUp(() {
     model = AppInitPresentationModel.initial(const AppInitInitialParams());
     navigator = AppInitMocks.appInitNavigator;
