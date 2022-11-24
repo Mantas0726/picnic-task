@@ -30,15 +30,17 @@ class _AppInitPageState extends State<AppInitPage>
   @override
   Widget build(BuildContext context) => Scaffold(
         body: stateObserver(
-          builder: (context, state) => Padding(
-            padding: const EdgeInsets.all(32.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Assets.images.logo.image(),
-                const SizedBox(height: 16),
-                if (state.isLoading) const CircularProgressIndicator(),
-              ],
+          builder: (context, state) => Center(
+            child: Padding(
+              padding: const EdgeInsets.all(32.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Assets.images.logo.image(),
+                  const SizedBox(height: 16),
+                  if (state.isLoading) const CircularProgressIndicator(),
+                ],
+              ),
             ),
           ),
         ),
