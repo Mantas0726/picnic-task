@@ -8,6 +8,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 import '../../../mocks/mocks.dart';
 import '../../../test_utils/golden_tests_utils.dart';
+import '../mocks/auth_mock_definitions.dart';
 
 Future<void> main() async {
   late LoginPage page;
@@ -15,6 +16,7 @@ Future<void> main() async {
   late LoginPresentationModel model;
   late LoginPresenter presenter;
   late LoginNavigator navigator;
+  late MockLogInUseCase useCase;
 
   void _initMvp() {
     initParams = const LoginInitialParams();
@@ -22,9 +24,11 @@ Future<void> main() async {
       initParams,
     );
     navigator = LoginNavigator(Mocks.appNavigator);
+    useCase = MockLogInUseCase();
     presenter = LoginPresenter(
       model,
       navigator,
+      useCase,
     );
     page = LoginPage(presenter: presenter);
   }
